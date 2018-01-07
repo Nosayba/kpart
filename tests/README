@@ -1,0 +1,16 @@
+This folder has scripts for running simple tests using KPart.
+
+example.sh
+==========
+The simple script is designed to demonstrate how to invoke KPart. 
+It runs multiple copies of a microbenchmark app which traverses an 
+array (available under kpart/lltools), then profiles their cache needs 
+and partitions the last-level cache among them using KPart.
+
+To execute any other applications and profile them + partition the cache using KPart,
+simply replace the process commands in the script with your own.
+
+
+
+
+
