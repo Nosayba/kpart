@@ -1,0 +1,23 @@
+#pragma once
+
+#define MSR_IA32_PERF_CTL (0x199)
+#define MSR_IA32_PERF_STATUS (0x198)
+#define MSR_PKG_ENERGY_STATUS (0x611)
+#define MSR_RAPL_POWER_UNIT (0x606)
+#define MSR_PKG_POWER_INFO (0x614)
+#define MSR_DRAM_ENERGY_STATUS (0x619)
+
+#define MSR_PP0_ENERGY_STATUS (0x639)
+#define MSR_PP0_POWER_LIMIT (0x638)
+#define MSR_PP0_PERF_STATUS (0x63B)
+#define MSR_PP0_POLICY (0x63A)
+
+#define MSR_PKG_PERF_STATUS (0x613)
+#define MSR_PERF_STATUS (0x198)
+
+#define MSR_IA32_PQR_ASSOC (0xc8f)
+#define MSR_IA32_L3_MASK_0 (0xc90)
+
+// Platform QoS MSRs (CMT)
+#define MSR_IA32_QM_EVTSEL (0xc8d)
+#define MSR_IA32_QM_CTR (0xc8e)
