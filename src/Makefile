@@ -1,4 +1,6 @@
-LIBPFMPATH ?= /scratch/harshad/perfmon2-libpfm4
+# Update LIBPFMPATH variable by making it point to location 
+# of libpfm4 library on your machine 
+LIBPFMPATH ?= /path/to/perfmon2-libpfm4
 LLTOOLSPATH = ../lltools
 
 CXX=g++
