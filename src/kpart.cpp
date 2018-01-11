@@ -79,8 +79,6 @@ extern "C" {
 bool enableLogging(true); //Turn on for detailed logging of profiling
 bool estimateMRCenabled(true);
 bool monitorStartFlag(false);
-bool sample12to1(true);
-bool geometricSamplePlan(false); //test: geometric sampling 1,2,3,5,8,10,11
 bool doMorePartitioning(true);
 
 int monitorLen = 1; //estimate MRC IPC point every monitorLen phases
