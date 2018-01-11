@@ -1,9 +1,8 @@
 #pragma once
 
 //#define ARMA_DONT_USE_CXX11
-//#include <armadillo>
 #define NOMINMAX
-#include </usr/include/armadillo2/armadillo>
+#include <armadillo>
 
 // Local specializations
 typedef arma::Col<uint64_t> u64vec;

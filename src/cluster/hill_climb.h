@@ -1,32 +1,34 @@
-/*
-* Copyright (C) 2017-2018 by Massachusetts Institute of Technology
-*
-* This file is part of KPart.
-*
-* Permission is hereby granted, free of charge, to any person obtaining a copy
-* of this software and associated documentation files (the "Software"), to deal
-* in the Software without restriction, including without limitation the rights
-* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-* copies of the Software, and to permit persons to whom the Software is
-* furnished to do so, subject to the following conditions:
-*
-* The above copyright notice and this permission notice shall be included in all
-* copies or substantial portions of the Software.
-*
-* If you use this software in your research, we request that you reference
-* the KPart paper ("KPart: A Hybrid Cache Partitioning-Sharing Technique for
-* Commodity Multicores", El-Sayed, Mukkara, Tsai, Kasture, Ma and Sanchez,
-* HPCA-24, February 2018) as the source in any publications that use this
-* software, and that you send us a citation of your work.
-*
-* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-* SOFTWARE.
-*/
+/** $lic$
+ * Copyright (C) 2012-2016 by Massachusetts Institute of Technology
+ * Copyright (C) 2010-2013 by The Board of Trustees of Stanford University
+ *
+ * This file is part of zsim.
+ *
+ * zsim is free software; you can redistribute it and/or modify it under the
+ * terms of the GNU General Public License as published by the Free Software
+ * Foundation, version 2.
+ *
+ * If you use this software in your research, we request that you reference
+ * the zsim paper ("ZSim: Fast and Accurate Microarchitectural Simulation of
+ * Thousand-Core Systems", Sanchez and Kozyrakis, ISCA-40, June 2013) as the
+ * source of the simulator in any publications that use this software, and that
+ * you send us a citation of your work. If you use code from Jigsaw
+ * (src/jigsaw*, src/gmon*, src/lookahead*), we request that you reference our
+ * papers ("Jigsaw: Scalable Software-Defined Caches", Beckmann and Sanchez,
+ * PACT-22, September 2013 and "Scaling Distributed Cache Hierarchies through
+ * Computation and Data Co-Scheduling", HPCA-21, Feb 2015). If you use code
+ * from Talus (src/talus*), we request that you reference our paper ("Talus: A
+ * Simple Way to Remove Cliffs in Cache Performance", Beckmann and Sanchez,
+ * HPCA-21, February 2015).
+ *
+ * zsim is distributed in the hope that it will be useful, but WITHOUT ANY
+ * WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 #pragma once
 #include "miss_curve.h"
 
