@@ -1,65 +1,56 @@
-# KPart
-KPart is a hybrid cache sharing-partitioning tool that can be used to partition the last-level cache among cores on Intel processors with Cache Allocation Technology (CAT) and Cache Monitoring Technology (CMT) support.
+## KPart
+KPart is a tool for partitioning the last-level cache (LLC) dynamically between co-running applications on an Intel multicore processor with <i>way-partitioning</i> support. KPart is designed to sidestep a key limitation of way-partitioning: coarse-grained partition sizes. 
 
-## Platform
+KPart profiles the cache needs of co-running applications periodically, then groups the applications based on their cache profiles into clusters and maps cache partitions to these clusters. Applications within a cluster share their assigned partition, while applications across clusters remain isolated. More details on how profiling, clustering, and cache assignments are done are available in our [HPCA'18 paper](http://people.csail.mit.edu/sanchez/papers/2018.kpart.hpca.pdf).
 
-This software was developed and tested on xyz. The following instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+### Platform
+KPart was developed and tested on an 8-core Intel Broadwell D-1540 processor which supports LLC way-partitioning. The system was running Ubuntu 14.04, Linux kernel version 4.2.3. The LLC size is 12MB and supports up to 12 partitions, each of size 1MB. 
+
 
 ### Prerequisites
+KPart requires the following libraries:
+* [perfmon2: Performance Monitoring on Linux](http://perfmon2.sourceforge.net/)
+* [armadillo: C++ Linear Algebra Library](http://arma.sourceforge.net/)
+* Make sure [Cache Allocation Technology (CAT) and Cache Monitoring Technology (CMT)](https://www.intel.com/content/www/us/en/communications/cache-monitoring-cache-allocation-technologies.html) are supported, otherwise the tools under kpart/lltools/cat will not be able to monitor or partition the shared cache. 
 
-What things you need to install the software and how to install them
+### Building KPart
 
+* Step 1: Build the libraries needed to access Intel's CAT and CMT features (under /kpart/lltools):
 ```
-Give examples
-```
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-```
-Give the example
+kpart$ cd lltools 
+kpart/lltools$ make 
 ```
 
-## Running the tests
-
-Explain how to run the testing script(s) available
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
-
-## Built With
-
-``` * [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* Step 2: Build KPart (under /kpart/src):
+```
+kpart$ cd src 
+kpart/src$ make 
 ```
 
-## Contributing
-
-```Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+### Running KPart 
+```
+Usage: ./kpart_cmt <comma-sep-events> <phase_len> <logfile/- for stdout> <warmup_period_B> <profile_period_B>-- <max_phases_1> <input_redirect_1/'-' for stdin>  <comma-sep-core-list> prog1 -- ...
 ```
 
-## Versioning
+#### Test Example
+A testing script is available under [kpart/tests/runtest_spec.sh](tests/runtest_spec.sh). 
+The script assumes SPEC-CPU2006 benchmark is available and runs multiple copies of SPEC apps, then profiles their cache needs and partitions the last-level cache among them using KPart. 
 
-```We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-```
+### Intel Bug with LLC Classes of Service 10, 11 
+Discuss bug here. 
 
-## Contributors  
+### Contributors  
+* Nosayba El-Sayed, CSAIL MIT/QCRI, HBKU
+* Harshad Kasture, Oracle 
+* Anurag Mukkara, CSAIL MIT 
 
-``` * **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+[comment]: <> (* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth) See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project. Built With * [Maven](https://maven.apache.org/) - Dependency Management * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-```
+### Publication 
+[El-Sayed, Mukkara, Tsai, Kasture, Ma, and Sanchez, KPart: A Hybrid Cache Partitioning-Sharing Technique for Commodity Multicores, HPCA-24, Austria, 2018.](http://people.csail.mit.edu/sanchez/papers/2018.kpart.hpca.pdf)
 
-## Publication 
-
-## License
-
+### License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
+### Acknowledgments
+* KPart is based on <i>sage</i> performance monitoring tool, developed by Daniel Sanchez, CSAIL MIT 
