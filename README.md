@@ -44,8 +44,6 @@ Discuss bug here.
 * Harshad Kasture, Oracle 
 * Anurag Mukkara, CSAIL MIT 
 
-[comment]: <> (* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth) See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project. Built With * [Maven](https://maven.apache.org/) - Dependency Management * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds)
-
 ### Publication 
 [El-Sayed, Mukkara, Tsai, Kasture, Ma, and Sanchez, KPart: A Hybrid Cache Partitioning-Sharing Technique for Commodity Multicores, HPCA-24, Austria, 2018.](http://people.csail.mit.edu/sanchez/papers/2018.kpart.hpca.pdf)
 
