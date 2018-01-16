@@ -21,7 +21,7 @@ kpart$ cd lltools
 kpart/lltools$ make 
 ```
 
-* Step 2: Build KPart (under /kpart/src):
+* Step 2: Update the LIBPFMPATH path in the Makefile under /kpart/src/ to point to your local LIBPFMPATH directory, then build KPart: 
 ```
 kpart$ cd src 
 kpart/src$ make 
