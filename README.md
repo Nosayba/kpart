@@ -43,6 +43,8 @@ Discuss bug here.
 * Nosayba El-Sayed, CSAIL MIT/QCRI, HBKU
 * Harshad Kasture, Oracle 
 * Anurag Mukkara, CSAIL MIT 
+* Daniel Sanchez, CSAIL MIT 
+* Po-An Tsai, CSAIL MIT 
 
 ### Publication 
 [El-Sayed, Mukkara, Tsai, Kasture, Ma, and Sanchez, KPart: A Hybrid Cache Partitioning-Sharing Technique for Commodity Multicores, HPCA-24, Austria, 2018.](http://people.csail.mit.edu/sanchez/papers/2018.kpart.hpca.pdf)
@@ -50,5 +52,3 @@ Discuss bug here.
 ### License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
 
-### Acknowledgments
-* KPart is based on <i>sage</i> performance monitoring tool, developed by Daniel Sanchez, CSAIL MIT 
