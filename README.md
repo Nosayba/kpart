@@ -33,7 +33,7 @@ Usage: ./kpart_cmt <comma-sep-events> <phase_len> <logfile/- for stdout> <warmup
 ```
 
 #### Test Example
-A testing script is available under [kpart/tests/runtest_spec.sh](tests/example.sh). 
+A testing script is available under [kpart/tests/example.sh](tests/example.sh). 
 The script assumes SPEC-CPU2006 benchmark is available and runs multiple copies of SPEC apps, then profiles their cache needs and partitions the last-level cache among them using KPart. 
 
 ### Intel Bug with LLC Classes of Service 10, 11 
