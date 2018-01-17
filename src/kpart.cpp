@@ -99,9 +99,9 @@ arma::mat sampledMRCs = zeros<arma::mat>(CACHE_WAYS, NUM_CORES);
 arma::mat sampledIPCs = zeros<arma::mat>(CACHE_WAYS, NUM_CORES);
 arma::vec loggingMRCFlags = zeros<arma::vec>(NUM_CORES);
 
-// Will be set according to user input:
-int invokeMonitorLen = -1; //Skip this much instructions before invoking DynaWay
-int warmUpInterval = -1;
+// Will be set according to the parameters passed to kpart 
+int invokeMonitorLen = -1; 
+int warmUpInterval = -1;  
 int profileInterval = -1;
 
 // NOTE: The 'master' mode, enabled via MASTER_PROC, treats the first process
@@ -167,8 +167,8 @@ struct ProcessInfo {
 
   void flush() {
     fflush(logFd);
-    fflush(mrcfd); //Nosayba: added
-    fflush(ipcfd); //Nosayba: added
+    fflush(mrcfd); 
+    fflush(ipcfd); 
   }
 
   ~ProcessInfo() { flush(); }
@@ -342,7 +342,6 @@ std::vector<std::vector<double> > getWsCurvesForCombinedMRCs(
       }
       wsCurve[p] = ws;
     }
-    //std::cout << std::endl;
     wsCurveVecDbl.push_back(wsCurve);
   }
 

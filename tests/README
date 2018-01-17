@@ -1,3 +1,14 @@
 This folder has scripts for running simple tests using KPart.
 
+example.sh
+==========
+This script shows an example of running multiple copies of a SPEC benchmark then 
+setting KPart's parameters and running it.
+
+To execute any other applications and profile them + partition the cache using KPart,
+simply replace the process commands in the script with your own.
+
+
+
+
 
