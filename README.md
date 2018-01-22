@@ -34,10 +34,10 @@ Usage: ./kpart_cmt <comma-sep-events> <phase_len> <logfile/- for stdout> <warmup
 
 #### Test Example
 A testing script is available under [kpart/tests/example.sh](tests/example.sh). 
-The script assumes SPEC-CPU2006 benchmark is available and runs multiple copies of SPEC apps, then profiles their cache needs and partitions the last-level cache among them using KPart. 
+The simple script is designed to demonstrate how to invoke KPart. It runs multiple copies of a microbenchmark app which traverses an array (available under kpart/lltools), then profiles their cache needs and partitions the last-level cache among them using KPart. 
 
-### Intel Bug with LLC Classes of Service 10, 11 
-Discuss bug here. 
+### Intel Bug with LLC partition numbers 10, 11 
+We found that in Intel Broadwell D-1540 processor, the LLC partitions numbered 10 and 11 cannot be mapped to two different classes of service (COS); i.e. any COS mapping that includes one of these partitions will automatically include the other partition as well. Therefore, when assigning partitions to classes of service on this processor model, one must make sure that 10 and 11 are always assigned to the same COS. 
 
 ### Contributors  
 * Nosayba El-Sayed, CSAIL MIT/QCRI, HBKU
