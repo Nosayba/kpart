@@ -4,6 +4,8 @@
 * Copyright (c) 2017-2018 by Massachusetts Institute of Technology
 * Copyright (c) 2017-2018 by Qatar Computing Research Institute, HBKU
 *
+* This file is part of KPart.
+*
 * Permission is hereby granted, free of charge, to any person obtaining a copy
 * of this software and associated documentation files (the "Software"), to deal
 * in the Software without restriction, including without limitation the rights
@@ -29,30 +31,44 @@
 * SOFTWARE.
 **/
 #pragma once
+#include "kpart.h"
+#include "cluster/armadillo.h"
+extern "C" {
+#include "perf_util.h"
+}
+#ifdef USE_CMT
+#include "cmt.h"
+#endif
 
-// Global config parameters for KPart.
-// Set these variables according to your platform specs
-const int CACHE_LINE_SIZE = 64;
+namespace cache_utils {
 
-// Number of historical profiling samples to average for estimating IPC-curves
-// and MRC-curves
-const int HIST_WINDOW_LENGTH = 3;
+// Cache sharing-partitioning utility functions, used heavily by KPart
+extern int share_all_cache_ways();
 
-// Number of cores in the system
-int NUM_CORES = 8; //TODO: detect programatically
+std::string get_cacheways_for_core(int coreIdx);
 
-// Available cache capacity to profile and partition
-int CACHE_WAYS = 12; //TODO: detect programatically
+void print_allocations(uint32_t *allocs);
 
-// Paths to Intel's Cache Allocation Technology CBM and COS tools
-const std::string CAT_CBM_TOOL_DIR = "../lltools/build/cat_cbm -c ";
-const std::string CAT_COS_TOOL_DIR = "../lltools/build/cat_cos -c ";
+void apply_partition_plan(std::stack<int> partitions[]);
 
-//Logging, monitoring and profiling vars
-bool enableLogging(true); //Turn on for detailed logging of profiling
+void do_ucp_mrcs(arma::mat mpkiVsWays);
 
-bool estimateMRCenabled(true);
+void get_maxmarginalutil_ipcs(arma::vec curve, int cur, int parts,
+                              double result[]);
 
-bool monitorStartFlag(false);
+void get_maxmarginalutil_mrcs(arma::vec curve, int cur, int parts,
+                              double result[]);
 
-bool doMorePartitioning(true);
+std::vector<std::vector<double> > get_wscurves_for_combinedmrcs(
+    std::vector<std::vector<std::vector<std::pair<uint32_t, uint32_t> > > >
+        cluster_bucks,
+    arma::mat ipcVsWays);
+
+void smoothenIPCs(arma::mat &ipcVsWays);
+
+void smoothenMRCs(arma::mat &mpkiVsWays);
+
+//void verify_intel_cos_issue(std::stack<int> [] & cluster_partitions, uint32_t K);
+void verify_intel_cos_issue(std::stack<int> *cluster_partitions, uint32_t K);
+
+} // namespace cache_utils
