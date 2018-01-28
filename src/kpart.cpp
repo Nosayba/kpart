@@ -55,11 +55,8 @@
 #include <fstream>
 #include <sstream>
 #include <stack>
-
 #include "cache_utils.h"
 using namespace cache_utils;
-
-#include "kpart.h"
 #include "cluster/hill_climb.h"
 #include "cluster/whirlpool.h"
 #include "cluster/hcluster.h"
@@ -75,6 +72,8 @@ extern "C" {
 #endif
 
 //Monitoring and profiling variables
+bool monitorStartFlag(false);
+bool doMorePartitioning(true);
 int monitorLen = 1; //estimate MRC IPC point every monitorLen phases
 int sampleSlicesIdx = -1;
 uint32_t K =
@@ -161,8 +160,8 @@ struct ProcessInfo {
 
   void flush() {
     fflush(logFd);
-    fflush(mrcfd); //Nosayba: added
-    fflush(ipcfd); //Nosayba: added
+    fflush(mrcfd);
+    fflush(ipcfd);
   }
 
   ~ProcessInfo() { flush(); }
@@ -278,9 +277,7 @@ void dump_counters(ProcessInfo &pinfo) {
 struct timeval startAll, endAll;
 struct timeval startT, endT;
 
-void startTime() {
-  gettimeofday(&startT, 0);
-}
+void startTime() { gettimeofday(&startT, 0); }
 
 void stopTime(const char *name) {
   gettimeofday(&endT, 0);
@@ -531,8 +528,6 @@ void dump_ipc_estimates(ProcessInfo &pinfo) {
 }
 // ---------------------------------------------------------- //
 
-
-
 void cluster_mrcs(arma::mat mpkiVsWays, arma::mat ipcVsWays) {
   if (enableLogging)
     printf("\n [INFO]  Inside cluster_mrcs()\n");
@@ -694,7 +689,8 @@ void cluster_mrcs(arma::mat mpkiVsWays, arma::mat ipcVsWays) {
 
   std::stack<int> app_partitions[numApps];
 
-  printf("\n ------------- KPart+DynaWay Cache assignments to apps --------------  "
+  printf("\n ------------- KPart+DynaWay Cache assignments to apps "
+         "--------------  "
          "\n");
   for (int a = 0; a < numApps; ++a) {
     int cid = item_to_clusts[a];
@@ -719,8 +715,6 @@ void cluster_mrcs(arma::mat mpkiVsWays, arma::mat ipcVsWays) {
   cache_utils::apply_partition_plan(app_partitions);
 
 }
-
-
 
 // ---------------------------------------------------------- //
 void sigsage_handler(int n, siginfo_t *info, void *vsc) {

@@ -1,6 +1,7 @@
 # Update LIBPFMPATH variable by making it point to location 
 # of libpfm4 library on your machine 
 LIBPFMPATH ?= /path/to/perfmon2-libpfm4
+
 LLTOOLSPATH = ../lltools
 
 CXX=g++
@@ -13,25 +14,20 @@ CXXFLAGS = $(CFLAGS) -std=c++0x
 CXXFLAGS_CMT = -DUSE_CMT -I$(LLTOOLSPATH)/include
 CXXFLAGS_MASTER = -DMASTER_PROC
 PU_SRC = $(LIBPFMPATH)/perf_examples/perf_util.c
+CLUST_SRC=$(wildcard cluster/*.cpp)
 
-default: kpart kpart_cmt kpart_cmt_master
+default: kpart
 
-kpart: kpart.o perf_util.o
+kpart : kpart.o perf_util.o cache_utils.cpp $(CLUST_SRC)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDFLAGS)
+
+kpart_master : kpart_master.o perf_util.o cache_utils.cpp $(CLUST_SRC)
 	$(CXX) -o $@ $^ $(LDFLAGS)
 
-kpart_cmt : kpart_cmt.o perf_util.o
-	$(CXX) -o $@ $^ $(LDFLAGS)
-
-kpart_cmt_master : kpart_cmt_master.o perf_util.o
-	$(CXX) -o $@ $^ $(LDFLAGS)
-
-kpart.o : kpart.cpp
-	$(CXX) $(CXXFLAGS) -o $@ -c $<
-
-kpart_cmt.o : kpart.cpp
+kpart.o : kpart.cpp 
 	$(CXX) $(CXXFLAGS) $(CXXFLAGS_CMT) -o $@ -c $<
 
-kpart_cmt_master.o : kpart.cpp
+kpart_master.o : kpart.cpp
 	$(CXX) $(CXXFLAGS) $(CXXFLAGS_CMT) $(CXXFLAGS_MASTER) -o $@ -c $<
 
 perf_util.o : $(PU_SRC)

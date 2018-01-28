@@ -31,11 +31,11 @@
 * SOFTWARE.
 **/
 #pragma once
+#include <sstream>
+#include <stack>
 #include "kpart.h"
-#include "cluster/armadillo.h"
-extern "C" {
-#include "perf_util.h"
-}
+#include <armadillo>
+using namespace arma;
 #ifdef USE_CMT
 #include "cmt.h"
 #endif
@@ -43,7 +43,7 @@ extern "C" {
 namespace cache_utils {
 
 // Cache sharing-partitioning utility functions, used heavily by KPart
-extern int share_all_cache_ways();
+int share_all_cache_ways();
 
 std::string get_cacheways_for_core(int coreIdx);
 
@@ -68,7 +68,8 @@ void smoothenIPCs(arma::mat &ipcVsWays);
 
 void smoothenMRCs(arma::mat &mpkiVsWays);
 
-//void verify_intel_cos_issue(std::stack<int> [] & cluster_partitions, uint32_t K);
+//void verify_intel_cos_issue(std::stack<int> [] & cluster_partitions, uint32_t
+//K);
 void verify_intel_cos_issue(std::stack<int> *cluster_partitions, uint32_t K);
 
 } // namespace cache_utils

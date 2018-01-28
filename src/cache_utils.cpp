@@ -30,20 +30,19 @@
 * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 * SOFTWARE.
 **/
-#include "kpart.h"
+
+#include <sstream>
+#include <string>
+#include <string.h>
+#include <iostream>
 #include "cache_utils.h"
-
-extern "C" {
-#include "perf_util.h"
-}
-
 #ifdef USE_CMT
 #include "cmt.h"
 #endif
 
 namespace cache_utils {
 
-int cache_utils::share_all_cache_ways() { // Share all ways!
+int share_all_cache_ways() { // Share all ways!
   if (enableLogging) {
     printf("[INFO]  Inside resetCacheWaysAllCores()\n");
   }
@@ -75,9 +74,8 @@ int cache_utils::share_all_cache_ways() { // Share all ways!
              cosID, sts);
     }
   }
- return sts; 
+  return sts;
 }
-
 
 void get_maxmarginalutil_mrcs(arma::vec curve, int cur, int parts,
                               double result[]) {
@@ -96,7 +94,7 @@ void get_maxmarginalutil_mrcs(arma::vec curve, int cur, int parts,
   result[1] = maxMuPart;
 }
 
-void cache_utils::smoothenMRCs(arma::mat &mpkiVsWays) {
+void smoothenMRCs(arma::mat &mpkiVsWays) {
   if (enableLogging)
     printf("[INFO]  Inside smoothenMRCs()\n");
   double prevValue = 0.0;
@@ -144,7 +142,6 @@ void smoothenIPCs(arma::mat &ipcVsWays) {
     ipcVsWays.print();
 }
 
-
 std::vector<std::vector<double> > get_wscurves_for_combinedmrcs(
     std::vector<std::vector<std::vector<std::pair<uint32_t, uint32_t> > > >
         cluster_bucks,
@@ -178,7 +175,6 @@ std::vector<std::vector<double> > get_wscurves_for_combinedmrcs(
 
   return wsCurveVecDbl;
 }
-
 
 void apply_partition_plan(std::stack<int> partitions[]) {
   std::string waysString;
@@ -222,7 +218,6 @@ void apply_partition_plan(std::stack<int> partitions[]) {
     }
   }
 }
-
 
 void print_allocations(uint32_t *allocs) {
   for (int i = 0; i < NUM_CORES; i++) {
@@ -589,8 +584,6 @@ void do_ucp_ipcs(arma::mat ipcVsWays) {
 
 }
 
-
-
 std::string get_cacheways_for_core(int coreIdx) {
   std::string getCOSstring =
       "../lltools/build/cat_cbm -g -c " +
@@ -603,10 +596,10 @@ std::string get_cacheways_for_core(int coreIdx) {
   return getCOSstring;
 }
 
-
 // --- Workaround bug with COS 10,11 in Intel's CAT --- //
-//void verify_intel_cos_issue(std::stack<int> [] & cluster_partitions, uint32_t K){
-void verify_intel_cos_issue(std::stack<int> * cluster_partitions, uint32_t K){
+//void verify_intel_cos_issue(std::stack<int> [] & cluster_partitions, uint32_t
+//K){
+void verify_intel_cos_issue(std::stack<int> *cluster_partitions, uint32_t K) {
   std::stack<int> clustParts;
   int victimId_b10 = -1;
   int victimId_b11 = -1;
@@ -726,7 +719,5 @@ void verify_intel_cos_issue(std::stack<int> * cluster_partitions, uint32_t K){
   }
   //return cluster_partitions;
 }
-
-
 
 } // namespace cache_utils

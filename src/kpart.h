@@ -39,20 +39,16 @@ const int CACHE_LINE_SIZE = 64;
 const int HIST_WINDOW_LENGTH = 3;
 
 // Number of cores in the system
-int NUM_CORES = 8; //TODO: detect programatically
+const int NUM_CORES = 8; //TODO: detect programatically
 
 // Available cache capacity to profile and partition
-int CACHE_WAYS = 12; //TODO: detect programatically
+const int CACHE_WAYS = 12; //TODO: detect programatically
 
 // Paths to Intel's Cache Allocation Technology CBM and COS tools
 const std::string CAT_CBM_TOOL_DIR = "../lltools/build/cat_cbm -c ";
 const std::string CAT_COS_TOOL_DIR = "../lltools/build/cat_cos -c ";
 
 //Logging, monitoring and profiling vars
-bool enableLogging(true); //Turn on for detailed logging of profiling
+const bool enableLogging(true); //Turn on for detailed logging of profiling
 
-bool estimateMRCenabled(true);
-
-bool monitorStartFlag(false);
-
-bool doMorePartitioning(true);
+const bool estimateMRCenabled(true);
