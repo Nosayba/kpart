@@ -4,6 +4,8 @@ FLAGS = -O3 -g -I./include
 CXXFLAGS = $(FLAGS) -std=c++0x
 CCFLAGS = $(FLAGS) 
 
+BUILDDIR = build
+
 TGTS = build/cat_cos build/cat_cbm build/cat_config build/cmt_config \
 	   build/cmt_rmid build/cpudmalatency build/ilp build/dvfslat \
 	   build/setFreq build/getFreq \
@@ -16,7 +18,10 @@ INCLUDES = ./include/cpuid.h ./include/msr.h \
 		   ./include/energy_meter.h ./include/cat.h \
 		   ./include/cmt.h
 
-all : $(TGTS)
+all : $(BUILDDIR) $(TGTS)
+
+$(BUILDDIR):
+	mkdir -p $@
 
 build/cat_cos : cat/cat_cos.cpp $(INCLUDES)
 	$(CXX) $(CXXFLAGS) $< -o $@
