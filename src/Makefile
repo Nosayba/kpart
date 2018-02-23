@@ -1,6 +1,6 @@
 # Update LIBPFMPATH variable by making it point to location 
 # of libpfm4 library on your machine 
-LIBPFMPATH ?= /path/to/perfmon2-libpfm4
+LIBPFMPATH ?= ../libpfm-4.9.0
 
 LLTOOLSPATH = ../lltools
 
