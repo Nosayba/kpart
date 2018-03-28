@@ -174,4 +174,16 @@ public:
   int64_t getLocalMemTraffic(uint64_t rmid) {
     return readQmCtr(rmid, LOCAL_MEM_BW);
   }
+
+  // This method returns the upper limit of DRAM traffic, measured in bytes,
+  // that can be reported from CMT before the counter overflows. In current
+  // implementations, the width of IA32_QM_CTR.data is 24-bits; this is
+  // hardcoded below since Intel does not provide a way to determine this
+  // programatically. This is then multiplied with the appropriate multiplier 
+  // (CPUID.(EAX=0FH, ECX=1H).EBX) to get the actual memory traffic in bytes.
+  // See Intel® 64 and IA-32 Architectures Software Developer’s Manual Volume
+  // 3B: System Programming Guide, Part 2, Chapter 17 for more details.
+  int64_t getMemTrafficMax() const {
+      return cmt_multiplier * (1LL << 24);
+  }
 };

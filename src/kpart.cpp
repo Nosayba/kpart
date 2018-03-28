@@ -171,7 +171,6 @@ struct ProcessInfo {
 #ifdef USE_CMT
 
 CMTController cmtCtrl;
-const int64_t MEM_TRAFFIC_MAX = 1L << 39;
 std::string lmbName = "LOCAL_MEM_TRAFFIC";
 std::string l3OccupName = "L3_OCCUPANCY";
 
@@ -179,7 +178,7 @@ void updateMemTraffic(ProcessInfo &pinfo) {
   int64_t memTraffic = cmtCtrl.getLocalMemTraffic(pinfo.rmid);
 
   if (memTraffic < pinfo.memTrafficLast) {
-    pinfo.memTrafficTotal += (MEM_TRAFFIC_MAX - pinfo.memTrafficLast);
+    pinfo.memTrafficTotal += (cmtCtrl.getMemTrafficMax() - pinfo.memTrafficLast);
     pinfo.memTrafficTotal += memTraffic;
   } else {
     pinfo.memTrafficTotal += (memTraffic - pinfo.memTrafficLast);
